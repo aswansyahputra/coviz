@@ -26,20 +26,23 @@ str(jabar_cases)
 
 title_lab <- "PERSEBARAN KASUS COVID-19 DI JAWA BARAT"
 subtitle_lab <- "<span style='color:#4682B4'>**KASUS ODP**</span>,  <span style='color:#8B008B'>**KASUS OTG**</span>, <span style='color:#FFD700'>**KASUS PDP**</span>, DAN <span style='color:#B22222'>**KASUS POSITIF**</span>"
-caption_lab <-  glue("SUMBER DATA: DINAS KESEHATAN PROVINSI JAWA BARAT\nDATA DIPERBAHARUI: {toupper(format(max(jabar_cases[['date']]), format = '%e %B %Y'))}")
+caption_lab <- glue("SUMBER DATA: DINAS KESEHATAN PROVINSI JAWA BARAT\nDATA DIPERBAHARUI: {toupper(format(max(jabar_cases[['date']]), format = '%e %B %Y'))}")
 
-jabar_cases_map <- 
+jabar_cases_map <-
   ggplot(data = jabar_cases) +
-  geom_sf(data = jabar_basemap,
-          fill = "seagreen3",
-          colour = "white",
-          size = 0.05) +
+  geom_sf(
+    data = jabar_basemap,
+    fill = "seagreen3",
+    colour = "white",
+    size = 0.05
+  ) +
   geom_point(aes(x = lng, y = lat, fill = status),
-             shape = 21,
-             colour = "white",
-             size = 2,
-             alpha = 0.3,
-             show.legend = FALSE) +
+    shape = 21,
+    colour = "white",
+    size = 2,
+    alpha = 0.3,
+    show.legend = FALSE
+  ) +
   scale_fill_manual(
     values = c("ODP" = "steelblue", "OTG" = "darkmagenta", "PDP" = "gold", "Positif" = "firebrick")
   ) +
@@ -58,11 +61,12 @@ jabar_cases_map <-
   )
 
 ggsave(
-  "outfile/jabar_cases_map.png", 
-  plot = jabar_cases_map, 
-  width = 8, 
+  "outfile/jabar_cases_map.png",
+  plot = jabar_cases_map,
+  width = 8,
   height = 8,
-  dpi = 300)
+  dpi = 300
+)
 
 # Tugas 2: membuat animasi linimasa kemunculan kasus positif --------------
 
@@ -71,13 +75,13 @@ ggsave(
 # 2. Membuat peta sebaran kasus positif
 # 3. Membuat animasi dengan frame merupakan tanggal konfirmasi kasus
 # 4. Menambahkan judul, sub-judul berupa tanggal (`date`), dan keterangan grafik
-# 
+#
 # Tahapan tambahan:
 # 1. Mengganti warna peta dasar,
 # 2. Mengganti warna titik
 # 3. Mengganti tema
 
-jabar_timelapse <- 
+jabar_timelapse <-
   ggplot(data = subset(jabar_cases, status == "Positif")) +
   geom_sf(
     data = jabar_basemap,
@@ -106,7 +110,7 @@ jabar_timelapse <-
   enter_appear()
 
 anim_save(
-  "outfile/jabar_timelapse.gif", 
+  "outfile/jabar_timelapse.gif",
   animation = jabar_timelapse,
   duration = 30,
   fps = 60,

@@ -12,7 +12,8 @@ load("data/indonesia_mobility.rda")
 indonesia_mobility_plot <-
   ggplot(data = indonesia_mobility) +
   geom_tile(aes(x = date, y = province, fill = pct_changes),
-            colour = "white") +
+    colour = "white"
+  ) +
   geom_vline(
     xintercept = as.Date("2020-03-02"),
     linetype = "dashed",
@@ -37,16 +38,20 @@ indonesia_mobility_plot <-
     subtitle = "GARIS VERTIKAL BERWARNA MERAH MENUNJUKAN TANGGAL KEMUNCULAN KASUS POSITIF PERTAMA",
     caption = "SUMBER DATA: GOOGLE COVID-19 COMMUNITY MOBILITY REPORTS"
   ) +
-  facet_wrap( ~ category) +
-  theme_ft_rc(base_size = 12,
-              plot_title_size = 30,
-              axis_text_size = 5,
-              grid = FALSE) +
-  theme(plot.title.position = "plot",
-        plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5),
-        strip.text = element_text(face = "bold", hjust = 0.5),
-        legend.position = "bottom")
+  facet_wrap(~category) +
+  theme_ft_rc(
+    base_size = 12,
+    plot_title_size = 30,
+    axis_text_size = 5,
+    grid = FALSE
+  ) +
+  theme(
+    plot.title.position = "plot",
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    strip.text = element_text(face = "bold", hjust = 0.5),
+    legend.position = "bottom"
+  )
 
 ggsave(
   "outfile/indonesia_mobility.png",
@@ -61,16 +66,17 @@ ggsave(
 
 jabar_mobility_plot <-
   ggplot(data = subset(indonesia_mobility, province == "West Java")) +
-  geom_line(aes(date, pct_changes, group = category), 
-            size = 1.2,
-            colour = ft_cols$red) +
+  geom_line(aes(date, pct_changes, group = category),
+    size = 1.2,
+    colour = ft_cols$red
+  ) +
   geom_vline(
     xintercept = as.Date("2020-03-02"),
     linetype = "dashed",
     colour = "firebrick"
   ) +
-  gghighlight(unhighlighted_params = list(colour = ft_cols$slate, alpha = 0.3, size = 0.8),use_direct_label = FALSE) +
-    scale_y_percent(limits = c(-0.8, 0.8), sec.axis = dup_axis(name = NULL)) +
+  gghighlight(unhighlighted_params = list(colour = ft_cols$slate, alpha = 0.3, size = 0.8), use_direct_label = FALSE) +
+  scale_y_percent(limits = c(-0.8, 0.8), sec.axis = dup_axis(name = NULL)) +
   labs(
     x = NULL,
     y = "PERSENTASE PERUBAHAN MOBILITAS",
@@ -78,15 +84,19 @@ jabar_mobility_plot <-
     subtitle = "GARIS VERTIKAL BERWARNA MERAH MENUNJUKAN TANGGAL KEMUNCULAN KASUS POSITIF PERTAMA",
     caption = "SUMBER DATA: GOOGLE COVID-19 COMMUNITY MOBILITY REPORTS"
   ) +
-  facet_wrap( ~ category) +
-  theme_ft_rc(base_size = 12,
-              plot_title_size = 30,
-              grid = FALSE,
-              ticks = TRUE) +
-  theme(plot.title.position = "plot",
-        plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5),
-        strip.text = element_text(face = "bold", hjust = 0.5))
+  facet_wrap(~category) +
+  theme_ft_rc(
+    base_size = 12,
+    plot_title_size = 30,
+    grid = FALSE,
+    ticks = TRUE
+  ) +
+  theme(
+    plot.title.position = "plot",
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    strip.text = element_text(face = "bold", hjust = 0.5)
+  )
 
 ggsave(
   "outfile/jabar_mobility.png",

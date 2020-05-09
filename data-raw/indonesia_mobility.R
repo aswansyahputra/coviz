@@ -24,20 +24,24 @@ global_mobility <-
   )
 
 indonesia_mobility <-
-  global_mobility %>% 
-  filter(country_region == "Indonesia",
-         !is.na(sub_region_1)) %>% 
-  rename_all(~str_remove(.x, "_percent_change_from_baseline")) %>% 
-  pivot_longer(cols = c(retail_and_recreation:residential),
-               names_to = "category",
-               values_to = "pct_changes") %>% 
+  global_mobility %>%
+  filter(
+    country_region == "Indonesia",
+    !is.na(sub_region_1)
+  ) %>%
+  rename_all(~ str_remove(.x, "_percent_change_from_baseline")) %>%
+  pivot_longer(
+    cols = c(retail_and_recreation:residential),
+    names_to = "category",
+    values_to = "pct_changes"
+  ) %>%
   transmute(
     province = sub_region_1,
     date,
-    category = str_replace_all(category, "_", " ") %>% 
+    category = str_replace_all(category, "_", " ") %>%
       str_to_title(),
     pct_changes = pct_changes / 100
-  ) %>% 
+  ) %>%
   arrange(province, category, date)
 
 usethis::use_data(indonesia_mobility, overwrite = TRUE)

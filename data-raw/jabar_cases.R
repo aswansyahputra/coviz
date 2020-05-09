@@ -7,11 +7,11 @@ library(dplyr)
 
 resp <- GET("https://covid19-public.digitalservice.id/api/v1/sebaran/jabar")
 
-jabar_cases <- 
-  resp %>% 
-  content(as = "text") %>% 
-  fromJSON() %>% 
-  pluck("data", "content") %>% 
+jabar_cases <-
+  resp %>%
+  content(as = "text") %>%
+  fromJSON() %>%
+  pluck("data", "content") %>%
   transmute(
     id,
     date = as.Date(tanggal_konfirmasi),
