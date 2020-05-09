@@ -1,0 +1,25 @@
+Package: coviz
+Title: COVID-19 Visualisation
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Muhammad Aswan",
+           family = "Syahputra",
+           role = c("aut", "cre"),
+           email = "muhammadaswansyahputra@gmail.com")
+Description: Compendium for West Java COVID-19 visualisation.
+    webinar.
+License: MIT + file LICENSE
+Depends: 
+    R (>= 2.10)
+Imports: 
+    gganimate,
+    gghighlight,
+    ggplot2,
+    ggtext,
+    glue,
+    hrbrthemes,
+    scales
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
