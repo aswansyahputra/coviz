@@ -3,6 +3,7 @@
 library(ggplot2)
 library(scales)
 library(gghighlight)
+library(hrbrthemes)
 
 load("data/indonesia_mobility.rda")
 
